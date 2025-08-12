@@ -21,6 +21,39 @@ Dropdown closes when clicking outside.
 
 ---
 
+## Usage
+
+```tsx
+import React, { useState } from "react";
+import MultiDropdownSelect from "./MultiDropdownSelect";
+
+const App: React.FC = () => {
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const items = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+
+  const handleChange = (newSelected: string[]) => {
+    setSelectedItems(newSelected);
+    console.log("Selected items:", newSelected);
+  };
+
+  return (
+    <section className="app">
+      <h1>Demo of MultiDropdownSelect</h1>
+      <MultiDropdownSelect
+        items={items}
+        onChange={handleChange}
+        value={selectedItems}
+        placeholder="Select or Add..."
+      />
+    </section>
+  );
+};
+
+export default App;
+
+--- 
+
+
 ### Clone or copy the component into your project
 ### Ensure you have React, TypeScript, and SCSS set up
 
@@ -28,4 +61,4 @@ Dropdown closes when clicking outside.
 
 ### 🪧 Demo
 
-see demo on https://multi-dropdown-select-tau.vercel.app/
+See demo on https://multi-dropdown-select-tau.vercel.app/
