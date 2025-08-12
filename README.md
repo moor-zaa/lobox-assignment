@@ -23,3 +23,9 @@ Dropdown closes when clicking outside.
 
 ### Clone or copy the component into your project
 ### Ensure you have React, TypeScript, and SCSS set up
+
+---
+
+### 🪧 Demo
+
+see demo on https://multi-dropdown-select-tau.vercel.app/
