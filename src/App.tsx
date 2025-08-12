@@ -23,13 +23,14 @@ function App() {
   }
 
   return (
-    <>
+    <section className='app'>
+      <h1>Demo of MultiDropdownSelect</h1>
       <MultiDropdownSelect
         items={items}
         onChange={handleChange}
         value={[]}
       />
-    </>
+    </section>
   )
 }
 

@@ -32,6 +32,7 @@ const MultiDropdownSelect: React.FC<MultiDropdownSelectProps> = ({ items, onChan
 
     const dropdownRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
     const handleUpdate = useCallback((updatedItems: string[]) => {
         setSelectedItems(updatedItems);
@@ -74,6 +75,16 @@ const MultiDropdownSelect: React.FC<MultiDropdownSelectProps> = ({ items, onChan
             setHighlightIndex(-1);
         }
     }
+
+    useEffect(() => {
+        if (itemsRef.current && highlightIndex >= 0 && itemsRef.current[highlightIndex]) {
+            itemsRef.current[highlightIndex]?.scrollIntoView({ block: 'nearest' });
+        }
+
+        return () => {
+            itemsRef.current[highlightIndex] = null;
+        }
+    }, [highlightIndex])
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -127,13 +138,15 @@ const MultiDropdownSelect: React.FC<MultiDropdownSelectProps> = ({ items, onChan
                     <ArrowDownIcon />
                 </div>
             </div>
-            {isOpen && <div className="multi-select__dropdown">
+            {isOpen && <div className="multi-select__dropdown" role="listbox">
                 {selectedItems.map((item: string) => <div key={item} onClick={(e) => handleRemoveItem(e, item)}
                     className="multi-select__dropdown-item selected-item" role="option" aria-selected={true}>
                     {item}
                     <CheckIcon />
                 </div>)}
-                {filteredItems.map((item: string, index: number) => <div role="option" aria-selected={highlightIndex === index} key={item} className={`multi-select__dropdown-item ${highlightIndex === index ? 'highlighted' : ''}`}
+                {filteredItems.map((item: string, index: number) => <div role="option" aria-selected={highlightIndex === index} key={item}
+                    ref={(el) => { itemsRef.current[index] = el }}
+                    className={`multi-select__dropdown-item ${highlightIndex === index ? 'highlighted' : ''}`}
                     onClick={(e) => handleSelectItem(e, item)}
                 >
                     {item}
