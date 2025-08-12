@@ -21,5 +21,5 @@ Dropdown closes when clicking outside.
 
 ---
 
-# Clone or copy the component into your project
-# Ensure you have React, TypeScript, and SCSS set up
+### Clone or copy the component into your project
+### Ensure you have React, TypeScript, and SCSS set up
