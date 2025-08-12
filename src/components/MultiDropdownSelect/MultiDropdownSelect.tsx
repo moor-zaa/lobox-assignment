@@ -78,7 +78,7 @@ const MultiDropdownSelect: React.FC<MultiDropdownSelectProps> = ({ items, onChan
 
     useEffect(() => {
         if (itemsRef.current && highlightIndex >= 0 && itemsRef.current[highlightIndex]) {
-            itemsRef.current[highlightIndex]?.scrollIntoView({ block: 'nearest' });
+            itemsRef.current[highlightIndex]?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         }
 
         return () => {
