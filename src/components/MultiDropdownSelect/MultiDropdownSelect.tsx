@@ -17,9 +17,9 @@ const ArrowDownIcon = memo(() => <div className="arrow-down-icon">
 
 interface MultiDropdownSelectProps {
     items: string[];
-    onChange: (selectedItems: string[]) => void;
+    onChange?: (selectedItems: string[]) => void;
     value?: string[];
-    placeholder?: string
+    placeholder?: string;
 }
 
 const MultiDropdownSelect: React.FC<MultiDropdownSelectProps> = ({ items, onChange, value = [], placeholder = "Select or Add ..." }) => {
@@ -33,10 +33,11 @@ const MultiDropdownSelect: React.FC<MultiDropdownSelectProps> = ({ items, onChan
     const dropdownRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
+    
 
     const handleUpdate = useCallback((updatedItems: string[]) => {
-        setSelectedItems(updatedItems);
-        onChange(updatedItems);
+            setSelectedItems(updatedItems);
+            if (onChange) onChange(updatedItems)
     }, [onChange]);
 
     const handleClickOutside = (e: MouseEvent) => {
@@ -103,6 +104,7 @@ const MultiDropdownSelect: React.FC<MultiDropdownSelectProps> = ({ items, onChan
         e.preventDefault();
         if (!selectedItems.includes(value) && value.trim().length > 0) {
             const newSelectedItems = [...selectedItems, value.trim()];
+
             handleUpdate(newSelectedItems);
         }
 
